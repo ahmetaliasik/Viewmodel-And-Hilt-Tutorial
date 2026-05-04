@@ -12,8 +12,19 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.lifecycle.viewmodel.compose.viewModel
+import androidx.navigation.NavType
+import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.composable
+import androidx.navigation.compose.rememberNavController
+import androidx.navigation.navArgument
+import androidx.wear.compose.material.TimeText
+import androidx.wear.compose.material.Vignette
 import com.example.train0.ui.screens.HomeScreen
 import com.example.train0.ui.theme.Train0Theme
+import com.example.train0.ui.viewmodel.CounterScreen
+import com.example.train0.ui.viewmodel.HealthViewmodel
+import com.example.train0.ui.viewmodel.SecondScreen
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -21,9 +32,24 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
             Train0Theme {
-                Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
+                Scaffold(
+                    modifier = Modifier.fillMaxSize(),
+                    ) { innerPadding ->
                     Box(modifier = Modifier.padding(innerPadding)){
-                      HomeScreen()
+                        val healthViewModel : HealthViewmodel = viewModel(viewModelStoreOwner = this@MainActivity)
+                        val navController = rememberNavController()
+                        NavHost(
+                            navController = navController,
+                            startDestination = "counterScreen"
+                        ) {
+                            composable("counterScreen") { CounterScreen(navController = navController, viewModel = healthViewModel) }
+                            composable(
+                                route ="secondScreen/{count}",
+                                arguments = listOf(navArgument("count") { type = NavType.IntType})
+                            ) { backStackEntry ->
+                                val countArg = backStackEntry.arguments?.getInt("count")
+                                SecondScreen(num = countArg, viewModel = healthViewModel) }
+                        }
                     }
                 }
             }

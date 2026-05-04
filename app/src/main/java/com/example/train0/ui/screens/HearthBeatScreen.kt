@@ -9,13 +9,14 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Devices
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.wear.tooling.preview.devices.WearDevices
 
 @Composable
 fun HearthBeatScreen(modifier: Modifier = Modifier) {
     
 }
 
-@Preview(device = Devices)
+@Preview(device = WearDevices.SMALL_ROUND)
 @Composable
 private fun HearthBeatPreview() {
     val hearthBeat : Int = 10

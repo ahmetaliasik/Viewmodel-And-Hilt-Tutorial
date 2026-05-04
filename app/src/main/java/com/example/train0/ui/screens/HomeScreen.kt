@@ -5,21 +5,20 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Scaffold
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.wear.compose.foundation.lazy.ScalingLazyColumn
+import androidx.wear.tooling.preview.devices.WearDevices
 
 @Composable
 fun HomeScreen(modifier: Modifier = Modifier) {
-    Column() {
-        Text("Adım Sayar : ")
-        Text("Kalp Atışı : ")
-        Text("Sıcaklık : ")
-    }
+    ScalingLazyColumn(
+
+    ) { }
 }
 
-@Preview
+@Preview(device = WearDevices.SMALL_ROUND)
 @Composable
 private fun HomeScreenPreview() {
     Scaffold() { innerPadding ->
