@@ -9,22 +9,18 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
-import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
-import androidx.wear.compose.material.TimeText
-import androidx.wear.compose.material.Vignette
-import com.example.train0.ui.screens.HomeScreen
+import com.example.train0.ui.screens.CounterScreen
+import com.example.train0.ui.screens.ProfileScreen
+import com.example.train0.ui.screens.SecondScreen
 import com.example.train0.ui.theme.Train0Theme
-import com.example.train0.ui.viewmodel.CounterScreen
 import com.example.train0.ui.viewmodel.HealthViewmodel
-import com.example.train0.ui.viewmodel.SecondScreen
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -49,6 +45,12 @@ class MainActivity : ComponentActivity() {
                             ) { backStackEntry ->
                                 val countArg = backStackEntry.arguments?.getInt("count")
                                 SecondScreen(num = countArg, viewModel = healthViewModel) }
+                            composable(route  = "something") { Text("Naber Arkidiş")}
+                            composable(route = "profile/{userId}") {
+                                backStageEntry ->
+                                val userId = backStageEntry.arguments?.getString("userId") ?: return@composable
+                                ProfileScreen(userId = userId)
+                            }
                         }
                     }
                 }
