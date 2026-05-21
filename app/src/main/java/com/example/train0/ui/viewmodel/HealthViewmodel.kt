@@ -1,11 +1,14 @@
 package com.example.train0.ui.viewmodel
 
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.SharedFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asSharedFlow
+import kotlinx.coroutines.launch
 
 sealed class NavigationEvent {
     data class ToSecond(val count: Int) : NavigationEvent()
@@ -29,14 +32,20 @@ class HealthViewmodel : ViewModel() {
     }
 
     fun onGoSecond(count: Int) {
-        _navigation.tryEmit(NavigationEvent.ToSecond(count))
+        viewModelScope.launch {
+            _navigation.emit(NavigationEvent.ToSecond(count))
+        }
     }
 
     fun onGoSomething() {
-        _navigation.tryEmit(NavigationEvent.ToSomething)
+        viewModelScope.launch {
+            _navigation.emit(NavigationEvent.ToSomething)
+        }
     }
 
     fun onGoProfile(userId: String) {
-        _navigation.tryEmit(NavigationEvent.ToProfile(userId))
+        viewModelScope.launch {
+            _navigation.emit(NavigationEvent.ToProfile(userId))
+        }
     }
 }
