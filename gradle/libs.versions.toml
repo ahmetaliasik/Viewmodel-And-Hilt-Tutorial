@@ -12,13 +12,20 @@ uiToolingPreview = "1.11.0"
 uiTooling = "1.11.0"
 wearToolingPreview = "1.0.0"
 wearCompose = "1.6.1"
+hilt = "2.59.2"
+hiltNavigationCompose = "1.2.0"
+ksp = "2.2.10-2.0.2"
 
 [libraries]
+hilt-android = {group = "com.google.dagger", name = "hilt-android", version.ref = "hilt"}
+hilt-compiler = { group = "com.google.dagger", name = "hilt-compiler", version.ref = "hilt"}
+androidx-hilt-navigation-compose = { group = "androidx.hilt", name = "hilt-navigation-compose", version.ref = "hiltNavigationCompose"}
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
 junit = { group = "junit", name = "junit", version.ref = "junit" }
 androidx-junit = { group = "androidx.test.ext", name = "junit", version.ref = "junitVersion" }
 androidx-espresso-core = { group = "androidx.test.espresso", name = "espresso-core", version.ref = "espressoCore" }
 androidx-lifecycle-runtime-ktx = { group = "androidx.lifecycle", name = "lifecycle-runtime-ktx", version.ref = "lifecycleRuntimeKtx" }
+androidx-lifecycle-runtime-compose = { group = "androidx.lifecycle", name = "lifecycle-runtime-compose", version.ref = "lifecycleRuntimeKtx" }
 androidx-activity-compose = { group = "androidx.activity", name = "activity-compose", version.ref = "activityCompose" }
 androidx-compose-bom = { group = "androidx.compose", name = "compose-bom", version.ref = "composeBom" }
 androidx-compose-ui = { group = "androidx.compose.ui", name = "ui" }
@@ -43,10 +50,13 @@ wear-compose = [
     "androidx-wear-compose-foundation",
     "androidx-wear-compose-material",
     "androidx-wear-compose-material3",
-    "androidx-wear-compose-navigation"
+    "androidx-wear-compose-navigation",
+    "hilt-android",
+    "androidx-hilt-navigation-compose"
 ]
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
 kotlin-compose = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
-
+hilt-android = {id = "com.google.dagger.hilt.android", version.ref = "hilt"}
+google-devtools-ksp = { id = "com.google.devtools.ksp", version.ref = "ksp"}
